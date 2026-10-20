@@ -1,219 +1,161 @@
-ReserveHub — Frontend
+# 🚀 ReserveHub
 
-A modern, responsive service booking and management platform built with Vue.js.
+### Book Smarter. Experience More.
 
-ReserveHub provides a simple and intuitive experience for discovering services, scheduling appointments, managing personal bookings, and administering services and users through a dedicated dashboard.
+**ReserveHub** is a modern, full-stack service booking platform that makes discovering services, scheduling appointments, and managing reservations simple and seamless.
 
-This repository contains the frontend application of ReserveHub, which communicates with a RESTful backend API.
+This repository contains the **Vue 3 frontend**, featuring a responsive customer experience and a dedicated administration dashboard.
 
-Features
+![Vue.js](https://img.shields.io/badge/Vue.js-3-42B883?style=for-the-badge&logo=vuedotjs&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
+![Pinia](https://img.shields.io/badge/Pinia-FFD859?style=for-the-badge&logo=vue.js&logoColor=black)
+![Bootstrap](https://img.shields.io/badge/Bootstrap-5-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white)
+![SCSS](https://img.shields.io/badge/SCSS-CD6799?style=for-the-badge&logo=sass&logoColor=white)
 
-Authentication & User Accounts
+---
 
-User registration and login
+## ✨ Key Features
 
-Email verification
+ReserveHub offers two dedicated experiences: one for customers and another for administrators.
 
-Password recovery and reset
+### 👤 Customer Experience
 
-JWT-based authentication with session refresh
+| Feature | Description |
+|---|---|
+| 🔐 Authentication | Registration, login, email verification, and password recovery |
+| 🔎 Explore Services | Browse, search, filter, and sort available services |
+| 📅 Appointment Booking | Select available time slots and make reservations |
+| 📋 My Bookings | Track appointments and cancel eligible bookings |
+| ⚙️ Profile Management | Update personal information and profile picture |
 
-Profile management with avatar uploads
+### 🛡️ Admin Dashboard
 
-Role-based access control
+| Feature | Description |
+|---|---|
+| 📊 Dashboard Overview | Monitor users, services, and booking statistics |
+| 🛠️ Service Management | Create, edit, activate, and deactivate services |
+| 📆 Booking Management | Review bookings and manage appointment statuses |
+| 👥 User Management | View registered users and manage user roles |
+| 🔒 Access Control | Restrict administration features to authorized users |
 
-Service Booking
+### 🎨 UI & User Experience
 
-Browse available services
+- Responsive layouts for desktop, tablet, and mobile
+- Modern blue-themed interface with reusable components
+- Loading skeletons, empty states, and toast notifications
+- Form validation and clear error feedback
+- Protected navigation and role-based interfaces
 
-Search, filter, and sort services
+---
 
-View service details and availability
+## 🧰 Technology Stack
 
-Book available appointment slots
+| Category | Technologies |
+|---|---|
+| **Frontend** | Vue 3, JavaScript, Vite |
+| **State Management** | Pinia |
+| **Routing** | Vue Router |
+| **API Integration** | Axios |
+| **UI & Styling** | Bootstrap 5, SCSS, Bootstrap Icons |
+| **Backend Integration** | REST API powered by Node.js, Express, and MongoDB |
 
-Track personal bookings
+---
 
-Cancel eligible bookings
+## 📂 Project Structure
 
-Admin Dashboard
+```text
+src/
+├── assets/         # Images and static resources
+├── components/     # Reusable UI components
+├── router/         # Routes and navigation guards
+├── services/       # Axios and API requests
+├── stores/         # Pinia state management
+└── views/          # Customer and admin pages
+```
 
-Overview of users, services, and bookings
+The application separates UI components, API communication, authentication state, and routing to keep the codebase organized and maintainable.
 
-Create, edit, activate, and deactivate services
+---
 
-Manage bookings and update their statuses
+## ⚡ Getting Started
 
-View booking details
+### 1. Requirements
 
-View registered users and manage user roles
+Make sure you have:
 
-Monitor booking status summaries
+- Node.js and npm installed
+- The ReserveHub backend API running
 
-User Interface
+### 2. Install Dependencies
 
-Fully responsive layouts
+Download or clone this repository, open its directory, and run:
 
-Clean, modern dashboard design
-
-Loading skeletons and empty states
-
-Form validation and error feedback
-
-Reusable Vue components
-
-Privacy Policy and Terms of Service pages
-
-Tech Stack
-
-Technology
-
-Purpose
-
-Vue 3
-
-Frontend framework
-
-JavaScript
-
-Application logic
-
-Vite
-
-Development and build tool
-
-Vue Router
-
-Client-side navigation
-
-Pinia
-
-State management
-
-Axios
-
-HTTP requests and API integration
-
-Bootstrap 5
-
-Responsive layout and UI components
-
-SCSS
-
-Custom styling
-
-Bootstrap Icons
-
-Interface icons
-
-Getting Started
-
-Prerequisites
-
-Node.js
-
-npm
-
-A running ReserveHub backend API
-
-Installation
-
-Clone the repository and install dependencies:
-
-Alternatively, download the repository directly from GitHub and open it in your terminal.
-
+```bash
 npm install
+```
 
-Environment Configuration
+### 3. Configure Environment
 
-The frontend requires access to the ReserveHub backend API.
+Create a `.env` file in the project root and configure the environment variables required by the application's API services.
 
-Configure the local environment settings for your backend connection. Environment files are excluded from version control to protect sensitive configuration.
+For locally hosted user and service images:
 
-For locally hosted uploaded images, the image base URL is:
-
+```env
 VITE_API_URL_IMAGE=http://localhost:8000/
+```
 
-Ensure the backend is running and the remaining API configuration matches your environment.
+The application also requires the correct backend API configuration to perform authentication, bookings, and data management.
 
-Run the Application
+### 4. Start Development Server
 
-Start the development server:
-
+```bash
 npm run dev
+```
 
-Production Build
+### 5. Production Build
 
-Generate an optimized production build:
-
+```bash
 npm run build
+```
 
-Demo Admin Account
+---
 
-The following credentials are intended only for an isolated demonstration environment containing sample data.
+## 🔑 Demo Admin Access
 
-Field
+For an **isolated demo environment** using sample data, the following account can be used to explore the administration dashboard.
 
-Value
+| Credential | Value |
+|---|---|
+| **Email** | `usertest@gmail.com` |
+| **Password** | `a123123123` |
+| **Role** | Administrator |
 
-Email
+> **Important:** These credentials are for a dedicated demo environment only. The account must exist in the connected backend and must not have access to real users or production data.
 
-usertest@gmail.com
+---
 
-Password
+## 🔗 Backend Integration
 
-a123123123
+ReserveHub uses a separate backend application responsible for:
 
-Role
+- Authentication and JWT session management
+- User accounts and role-based authorization
+- Services and appointment availability
+- Booking creation and status updates
+- Profile images and file uploads
 
-Admin
+**This repository contains the frontend only.** A running backend and database are required for full functionality.
 
-The demo account must exist in the connected backend database. These credentials do not provide access without a configured backend.
+---
 
-Project Architecture
+## 🎯 Project Highlights
 
-The frontend follows a component-based structure with separation between presentation, routing, application state, and API communication.
+This project demonstrates practical experience in:
 
-Views: Application pages and dashboard screens
+**Vue 3 Development** · **REST API Integration** · **Authentication** · **State Management** · **Responsive UI** · **Admin Dashboards** · **Full-Stack Architecture**
 
-Components: Reusable UI elements
+---
 
-Router: Navigation and protected routes
+**ReserveHub** — *Book Smarter. Experience More.*
 
-Stores: Authentication and shared application state
-
-Services: Backend API communication
-
-Assets: Images and other static resources
-
-Backend Integration
-
-ReserveHub uses a separate backend application built with Node.js, Express.js, and MongoDB.
-
-The backend handles authentication, user management, service management, booking operations, image uploads, and authorization.
-
-This frontend requires the backend for dynamic functionality.
-
-Project Purpose
-
-ReserveHub was developed as a full-stack web development project to demonstrate practical experience with:
-
-Building responsive single-page applications
-
-Integrating RESTful APIs
-
-Managing authentication and user sessions
-
-Implementing role-based interfaces
-
-Handling forms, validation, and file uploads
-
-Developing administrative dashboards
-
-Organizing scalable frontend code
-
-License
-
-No open-source license has been specified for this repository.
-
-ReserveHub — Book smarter. Experience more.
+Built with Vue 3 and a focus on clean interfaces, practical functionality, and user experience.

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vite App</title>
+
+    <style>
+      :root{
+        --main-color: #052469;
+        --main-background: #edf6ff;
+      }
+
+      * {
+        font-family: 'Inter', sans-serif !important;
+        -webkit-font-smoothing: antialiased; /* لجعل الحواف ناعمة وفائقة الدقة */
+        -moz-osx-font-smoothing: grayscale;
+        letter-spacing: -0.02em; /* تقريب الحروف لتعطي نفس المظهر اللذيذ في الصورة */
+      }
+      
+      html{
+          &::-webkit-scrollbar {
+            height: 7px;
+            
+          }
+
+          &::-webkit-scrollbar-track {
+            background: #edf6ff;
+            border-radius: 10px;
+          }
+
+          &::-webkit-scrollbar-thumb {
+            background: #8dbbfa;
+            border-radius: 10px;
+          }
+
+          &::-webkit-scrollbar-thumb:hover {
+            background: #0962f0;
+          }
+
+          scrollbar-width: thin;
+          scrollbar-color: #8dbbfa #edf6ff;
+
+        }
+    </style>
+
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

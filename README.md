@@ -2,6 +2,8 @@
 
 ### Book Smarter. Experience More.
 
+**[🌐 Live Demo — Explore ReserveHub](https://reserve-hub-frontend.vercel.app/)**
+
 **ReserveHub** is a modern, full-stack service booking platform that makes discovering services, scheduling appointments, and managing reservations simple and seamless.
 
 This repository contains the **Vue 3 frontend**, featuring a responsive customer experience and a dedicated administration dashboard.
@@ -153,6 +155,12 @@ ReserveHub uses a separate backend application responsible for:
 This project demonstrates practical experience in:
 
 **Vue 3 Development** · **REST API Integration** · **Authentication** · **State Management** · **Responsive UI** · **Admin Dashboards** · **Full-Stack Architecture**
+
+---
+
+## 🌐 Live Demo
+
+**Explore ReserveHub:** [https://reserve-hub-frontend.vercel.app/](https://reserve-hub-frontend.vercel.app/)
 
 ---
 

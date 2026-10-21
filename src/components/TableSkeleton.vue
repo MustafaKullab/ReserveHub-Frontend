@@ -1,4 +1,16 @@
 <template>
+  <div class="skeleton-header d-flex align-items-center justify-content-between gap-3 p-2 mb-2">
+    <div class="d-flex align-items-center gap-2 flex-grow-1">
+      <div class="skeleton skeleton-icon"></div>
+
+      <div class="flex-grow-1">
+        <div class="skeleton skeleton-heading mb-2"></div>
+        <div class="skeleton skeleton-subheading"></div>
+      </div>
+    </div>
+
+    <div class="skeleton skeleton-link"></div>
+  </div>
   <div class="table-responsive custom-scrollbar flex-grow-1">
     <table class="table container-table">
       <thead>
@@ -115,6 +127,30 @@ defineProps({
 
 .customer-skeleton {
   min-height: 58px;
+}
+
+.skeleton-icon {
+  width: 35px;
+  height: 35px;
+  flex-shrink: 0;
+}
+
+.skeleton-heading {
+  width: 180px;
+  max-width: 100%;
+  height: 18px;
+}
+
+.skeleton-subheading {
+  width: 240px;
+  max-width: 100%;
+  height: 12px;
+}
+
+.skeleton-link {
+  width: 65px;
+  height: 15px;
+  flex-shrink: 0;
 }
 
 @keyframes skeleton-loading {

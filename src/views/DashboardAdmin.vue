@@ -123,239 +123,244 @@
             <div
               class="tableContainer bg-white p-2 rounded flex-fill d-flex flex-column border mb-3 mb-lg-0"
             >
-              <div
-                class="header p-2 px-1 d-flex align-items-center justify-content-between flex-column flex-md-row gap-2"
-              >
-                <div class="title d-flex gap-2">
-                  <div
-                    class="icon d-flex align-items-center justify-content-center rounded-3"
-                    style="
-                      width: 35px;
-                      height: 35px;
-                      background-color: #e7f2ff;
-                      color: #2785f5;
-                      flex-shrink: 0;
-                    "
-                  >
-                    <i class="bi bi-calendar4 fs-5"></i>
-                  </div>
-                  <div class="text">
-                    <div class="fw-bold fs-5">Bookings Overview</div>
-                    <div class="parag" style="color: #93a4bb">
-                      A quick look at bookings in your system
-                    </div>
-                  </div>
-                </div>
-                <div class="link">
-                  <router-link
-                    class="d-flex align-items-center text-decoration-none gap-2"
-                    :to="{ name: 'bookingsPage' }"
-                  >
-                    <div class="text">View All</div>
-                    <div class="icon" style="margin-top: 1px">
-                      <i class="bi bi-arrow-right"></i>
-                    </div>
-                  </router-link>
-                </div>
-              </div>
               <TableSkeleton v-if="loadingBookings" />
-              <div class="table-responsive custom-scrollbar flex-grow-1" v-if="!loading">
-                <table class="table container-table">
-                  <thead>
-                    <tr>
-                      <th
-                        scope="col"
-                        style="background-color: #f0f4fb; border-top-left-radius: 5px !important"
-                        class=" "
-                      >
-                        Customer
-                      </th>
-                      <th scope="col" style="background-color: #f0f4fb">Service</th>
-                      <th scope="col" style="background-color: #f0f4fb">Date & Time</th>
-                      <th scope="col" style="background-color: #f0f4fb">Status</th>
-                      <th
-                        scope="col"
-                        style="background-color: #f0f4fb; border-top-right-radius: 5px"
-                      >
-                        Actions
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr v-for="(booking, i) of bookings" :key="booking?._id">
-                      <td>
-                        <div class="customer-cell fw-bold mt-1">
-                          <div class="customerDetails d-flex align-items-center gap-3">
-                            <div class="image" style="flex-shrink: 0">
-                              <img
-                                :src="`${apiUrlImage}${booking?.userId?.avatar}`"
-                                style="width: 50px; height: 50px"
-                                class="service-image rounded-pill"
-                                :alt="booking?.userId.name"
-                                @error="handleImageError"
-                              />
-                            </div>
+              <div v-else>
+                <div
+                  class="header p-2 px-1 d-flex align-items-center justify-content-between flex-column flex-md-row gap-2"
+                >
+                  <div class="title d-flex gap-2">
+                    <div
+                      class="icon d-flex align-items-center justify-content-center rounded-3"
+                      style="
+                        width: 35px;
+                        height: 35px;
+                        background-color: #e7f2ff;
+                        color: #2785f5;
+                        flex-shrink: 0;
+                      "
+                    >
+                      <i class="bi bi-calendar4 fs-5"></i>
+                    </div>
+                    <div class="text">
+                      <div class="fw-bold fs-5">Bookings Overview</div>
+                      <div class="parag" style="color: #93a4bb">
+                        A quick look at bookings in your system
+                      </div>
+                    </div>
+                  </div>
+                  <div class="link">
+                    <router-link
+                      class="d-flex align-items-center text-decoration-none gap-2"
+                      style="width: 80px"
+                      :to="{ name: 'bookingsPage' }"
+                    >
+                      <div class="text">View All</div>
+                      <div class="icon" style="margin-top: 1px">
+                        <i class="bi bi-arrow-right"></i>
+                      </div>
+                    </router-link>
+                  </div>
+                </div>
+                <div class="table-responsive custom-scrollbar flex-grow-1">
+                  <table class="table container-table">
+                    <thead>
+                      <tr>
+                        <th
+                          scope="col"
+                          style="background-color: #f0f4fb; border-top-left-radius: 5px !important"
+                          class=" "
+                        >
+                          Customer
+                        </th>
+                        <th scope="col" style="background-color: #f0f4fb">Service</th>
+                        <th scope="col" style="background-color: #f0f4fb">Date & Time</th>
+                        <th scope="col" style="background-color: #f0f4fb">Status</th>
+                        <th
+                          scope="col"
+                          style="background-color: #f0f4fb; border-top-right-radius: 5px"
+                        >
+                          Actions
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr v-for="(booking, i) of bookings" :key="booking?._id">
+                        <td>
+                          <div class="customer-cell fw-bold mt-1">
+                            <div class="customerDetails d-flex align-items-center gap-3">
+                              <div class="image" style="flex-shrink: 0">
+                                <img
+                                  :src="`${apiUrlImage}${booking?.userId?.avatar}`"
+                                  style="width: 50px; height: 50px"
+                                  class="service-image rounded-pill"
+                                  :alt="booking?.userId?.name"
+                                  @error="handleImageError"
+                                />
+                              </div>
 
-                            <div class="info">
-                              <div class="name fw-bold">{{ booking.userId.name }}</div>
-                              <div class="text description text-muted">
-                                {{ booking.userId.email }}
+                              <div class="info">
+                                <div class="name fw-bold">{{ booking?.userId?.name }}</div>
+                                <div class="text description text-muted">
+                                  {{ booking.userId.email }}
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      </td>
-                      <td>
-                        <div class="service-cell mt-2">
-                          <div class="name fw-bold">{{ booking.serviceId.name }}</div>
-                        </div>
-                      </td>
+                        </td>
+                        <td>
+                          <div class="service-cell mt-2">
+                            <div class="name fw-bold">{{ booking?.serviceId?.name }}</div>
+                          </div>
+                        </td>
 
-                      <td>
-                        <div class="dateAndTime d-flex align-items-center gap-2 mt-2">
-                          <div class="date">
-                            <div class="dateFormat text-muted">
-                              {{ formatDate(booking.startTime) }}
+                        <td>
+                          <div class="dateAndTime d-flex align-items-center gap-2 mt-2">
+                            <div class="date">
+                              <div class="dateFormat text-muted">
+                                {{ formatDate(booking?.startTime) }}
+                              </div>
+                            </div>
+                            <div>-</div>
+                            <div class="time">
+                              <div class="timeFormat text-muted">
+                                {{ formatTime(booking?.startTime) }}
+                              </div>
                             </div>
                           </div>
-                          <div>-</div>
-                          <div class="time">
-                            <div class="timeFormat text-muted">
-                              {{ formatTime(booking.startTime) }}
-                            </div>
-                          </div>
-                        </div>
-                      </td>
+                        </td>
 
-                      <td>
-                        <div
-                          class="status rounded mt-3"
-                          :class="booking.status"
-                          style="padding: 5px 10px 5px 25px; width: fit-content"
-                        >
-                          {{ capitalize(booking.status) }}
-                        </div>
-                      </td>
-                      <td class="actions">
-                        <div class="viewLink mt-3">
-                          <router-link
-                            class="edit btn btn-outline-primary d-flex align-items-center justify-content-center gap-2"
-                            :to="{ name: 'bookingDetails', params: { bookingId: booking._id } }"
+                        <td>
+                          <div
+                            class="status rounded mt-3"
+                            :class="booking?.status"
+                            style="padding: 5px 10px 5px 25px; width: fit-content"
                           >
-                            <div class="icon"><i class="bi bi-eye"></i></div>
-                            <div class="text">View</div>
-                          </router-link>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+                            {{ capitalize(booking?.status) }}
+                          </div>
+                        </td>
+                        <td class="actions">
+                          <div class="viewLink mt-3">
+                            <router-link
+                              class="edit btn btn-outline-primary d-flex align-items-center justify-content-center gap-2"
+                              :to="{ name: 'bookingDetails', params: { bookingId: booking?._id } }"
+                            >
+                              <div class="icon"><i class="bi bi-eye"></i></div>
+                              <div class="text">View</div>
+                            </router-link>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           </div>
           <div class="col-lg-6 d-flex">
             <div class="tableContainer bg-white p-2 rounded flex-fill d-flex flex-column border">
-              <div
-                class="header p-2 px-1 d-flex align-items-center justify-content-between flex-column flex-md-row gap-3"
-              >
-                <div class="title d-flex gap-2">
-                  <div
-                    class="icon d-flex align-items-center justify-content-center rounded-3"
-                    style="
-                      width: 35px;
-                      height: 35px;
-                      background-color: #e7f2ff;
-                      color: #2785f5;
-                      flex-shrink: 0;
-                    "
-                  >
-                    <i class="bi bi-people fs-5"></i>
-                  </div>
-                  <div class="text">
-                    <div class="fw-bold fs-5">Users Overview</div>
-                    <div class="parag" style="color: #93a4bb">
-                      A quick look at registered users in your system
-                    </div>
-                  </div>
-                </div>
-                <div class="link">
-                  <router-link
-                    class="d-flex align-items-center text-decoration-none gap-2"
-                    :to="{ name: 'manageUsers' }"
-                  >
-                    <div class="text">View All</div>
-                    <div class="icon" style="margin-top: 1px">
-                      <i class="bi bi-arrow-right"></i>
-                    </div>
-                  </router-link>
-                </div>
-              </div>
               <TableSkeleton v-if="loadingUsers" />
-              <div class="table-responsive custom-scrollbar flex-grow-1" v-if="!loadingUsers">
-                <table class="table users-overview-table">
-                  <thead>
-                    <tr>
-                      <th
-                        scope="col"
-                        style="background-color: #f0f4fb; border-top-left-radius: 5px !important"
-                        class=" "
-                      >
-                        User
-                      </th>
-                      <th scope="col" style="background-color: #f0f4fb">Email</th>
-                      <th scope="col" style="background-color: #f0f4fb">Role</th>
-                      <th
-                        scope="col"
-                        style="background-color: #f0f4fb; border-top-right-radius: 5px"
-                      >
-                        Joined
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr v-for="(user, i) of users" :key="user?._id">
-                      <td>
-                        <div class="customer-cell fw-bold mt-1">
-                          <div class="customerDetails d-flex align-items-center gap-3">
-                            <div class="image" style="flex-shrink: 0">
-                              <img
-                                :src="`${apiUrlImage}${user?.avatar}`"
-                                style="width: 50px; height: 50px"
-                                class="service-image rounded-pill"
-                                :alt="user?.name"
-                                @error="handleImageError"
-                              />
-                            </div>
+              <div v-else>
+                <div
+                  class="header p-2 px-1 d-flex align-items-center justify-content-between flex-column flex-md-row gap-3"
+                >
+                  <div class="title d-flex gap-2">
+                    <div
+                      class="icon d-flex align-items-center justify-content-center rounded-3"
+                      style="
+                        width: 35px;
+                        height: 35px;
+                        background-color: #e7f2ff;
+                        color: #2785f5;
+                        flex-shrink: 0;
+                      "
+                    >
+                      <i class="bi bi-people fs-5"></i>
+                    </div>
+                    <div class="text">
+                      <div class="fw-bold fs-5">Users Overview</div>
+                      <div class="parag" style="color: #93a4bb">
+                        A quick look at registered users in your system
+                      </div>
+                    </div>
+                  </div>
+                  <div class="link">
+                    <router-link
+                      class="d-flex align-items-center text-decoration-none gap-2"
+                      :to="{ name: 'manageUsers' }"
+                    >
+                      <div class="text">View All</div>
+                      <div class="icon" style="margin-top: 1px">
+                        <i class="bi bi-arrow-right"></i>
+                      </div>
+                    </router-link>
+                  </div>
+                </div>
+                <div class="table-responsive custom-scrollbar flex-grow-1">
+                  <table class="table users-overview-table">
+                    <thead>
+                      <tr>
+                        <th
+                          scope="col"
+                          style="background-color: #f0f4fb; border-top-left-radius: 5px !important"
+                          class=" "
+                        >
+                          User
+                        </th>
+                        <th scope="col" style="background-color: #f0f4fb">Email</th>
+                        <th scope="col" style="background-color: #f0f4fb">Role</th>
+                        <th
+                          scope="col"
+                          style="background-color: #f0f4fb; border-top-right-radius: 5px"
+                        >
+                          Joined
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr v-for="(user, i) of users" :key="user?._id">
+                        <td>
+                          <div class="customer-cell fw-bold mt-1">
+                            <div class="customerDetails d-flex align-items-center gap-3">
+                              <div class="image" style="flex-shrink: 0">
+                                <img
+                                  :src="`${apiUrlImage}${user?.avatar}`"
+                                  style="width: 50px; height: 50px"
+                                  class="service-image rounded-pill"
+                                  :alt="user?.name"
+                                  @error="handleImageError"
+                                />
+                              </div>
 
-                            <div class="info">
-                              <div class="name fw-bold">{{ user?.name }}</div>
-                              <div class="text description text-muted">
-                                {{ user?.email }}
+                              <div class="info">
+                                <div class="name fw-bold">{{ user?.name }}</div>
+                                <div class="text description text-muted">
+                                  {{ user?.email }}
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      </td>
-                      <td>
-                        <div class="email mt-2">
-                          <div class="name fw-bold">{{ user?.email }}</div>
-                        </div>
-                      </td>
+                        </td>
+                        <td>
+                          <div class="email mt-2">
+                            <div class="name fw-bold">{{ user?.email }}</div>
+                          </div>
+                        </td>
 
-                      <td>
-                        <div class="role mt-2 rounded-pill" :class="user?.role">
-                          {{ user?.role }}
-                        </div>
-                      </td>
+                        <td>
+                          <div class="role mt-2 rounded-pill" :class="user?.role">
+                            {{ user?.role }}
+                          </div>
+                        </td>
 
-                      <td>
-                        <div class="joined mt-3">
-                          {{ formatDate(user?.createdAt) }}
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+                        <td>
+                          <div class="joined mt-3">
+                            {{ formatDate(user?.createdAt) }}
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           </div>
@@ -403,13 +408,14 @@
                         <div
                           class="progress bg-warning rounded-pill"
                           :style="{
-                            width: (countsBookings.pending / countsBookings.total || 0) * 100 + `%`,
+                            width:
+                              (countsBookings?.pending / countsBookings?.total || 0) * 100 + `%`,
                           }"
                         ></div>
                       </div>
                     </div>
                     <div class="count position-absolute fs-4" style="top: 5px; right: 15px">
-                      {{ countsBookings.pending }}
+                      {{ countsBookings?.pending }}
                     </div>
                   </div>
                 </div>
@@ -475,13 +481,13 @@
                           class="progress bg-danger rounded-pill"
                           :style="{
                             width:
-                              (countsBookings.cancelled / countsBookings.total || 0) * 100 + `%`,
+                              (countsBookings?.cancelled / countsBookings?.total || 0) * 100 + `%`,
                           }"
                         ></div>
                       </div>
                     </div>
                     <div class="count position-absolute fs-4" style="top: 5px; right: 15px">
-                      {{ countsBookings.cancelled }}
+                      {{ countsBookings?.cancelled }}
                     </div>
                   </div>
                 </div>

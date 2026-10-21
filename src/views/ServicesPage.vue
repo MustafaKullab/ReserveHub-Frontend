@@ -154,8 +154,14 @@ const searchServices = async () => {
 };
 
 onMounted(async () => {
-  const data = await getServices(queries.value);
-  services.value = data.services;
+  try {
+    loading.value = true;
+
+    const data = await getServices(queries.value);
+    services.value = data.services;
+  } finally {
+    loading.value = false;
+  }
 });
 </script>
 

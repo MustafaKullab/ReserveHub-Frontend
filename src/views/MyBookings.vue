@@ -52,7 +52,7 @@
                 </div>
                 <div class="details">
                   <div class="title">Total Bookings</div>
-                  <div class="count fw-bold fs-4">{{ counts.total }}</div>
+                  <div class="count fw-bold fs-4">{{ counts.total || 0 }}</div>
                 </div>
               </div>
             </div>
@@ -75,7 +75,7 @@
                 </div>
                 <div class="details">
                   <div class="title">Pending</div>
-                  <div class="count fw-bold fs-4">{{ counts.pending }}</div>
+                  <div class="count fw-bold fs-4">{{ counts.pending || 0 }}</div>
                 </div>
               </div>
             </div>
@@ -98,7 +98,7 @@
                 </div>
                 <div class="details">
                   <div class="title">Confirmed</div>
-                  <div class="count fw-bold fs-4">{{ counts.confirmed }}</div>
+                  <div class="count fw-bold fs-4">{{ counts.confirmed || 0 }}</div>
                 </div>
               </div>
             </div>
@@ -121,7 +121,7 @@
                 </div>
                 <div class="details">
                   <div class="title">Completed</div>
-                  <div class="count fw-bold fs-4">{{ counts.completed }}</div>
+                  <div class="count fw-bold fs-4">{{ counts.completed || 0 }}</div>
                 </div>
               </div>
             </div>
@@ -144,7 +144,7 @@
                 </div>
                 <div class="details">
                   <div class="title">Cancelled</div>
-                  <div class="count fw-bold fs-4">{{ counts.cancelled }}</div>
+                  <div class="count fw-bold fs-4">{{ counts.cancelled || 0 }}</div>
                 </div>
               </div>
             </div>
@@ -294,11 +294,11 @@
               </div>
             </div>
 
-            <div class="bookings p-3 flex-grow-1" v-else-if="bookings.length > 0">
+            <div class="bookings p-3 flex-grow-1" v-else-if="bookings?.length > 0">
               <div
                 class="booking bookingBox row p-2 bg-white rounded-4 shadow-sm mb-2"
                 v-for="booking of bookings"
-                :key="booking._id"
+                :key="booking?._id"
               >
                 <div class="col-xl-4">
                   <div
@@ -306,7 +306,7 @@
                   >
                     <div class="image">
                       <img
-                        :src="`${apiUrlImage}${booking.serviceId.image}`"
+                        :src="`${apiUrlImage}${booking?.serviceId?.image}`"
                         class="rounded"
                         style="width: 140px"
                         alt="service img"
@@ -316,10 +316,10 @@
                       class="details d-flex flex-column justify-content-center mt-2 mb-3 mt-xl-0 mb-xl-0"
                     >
                       <h5 class="title fw-bold m-0" style="color: var(--main-color)">
-                        {{ booking.serviceId.name }}
+                        {{ booking?.serviceId?.name }}
                       </h5>
                       <p class="description text-muted small m-0">
-                        {{ booking.serviceId.description }}
+                        {{ booking?.serviceId?.description }}
                       </p>
                     </div>
                   </div>
@@ -336,7 +336,7 @@
                         <i class="bi bi-calendar-week"></i>
                       </div>
                       <div class="Date text-muted small">
-                        {{ formatDate(booking.startTime) }}
+                        {{ formatDate(booking?.startTime) }}
                       </div>
                     </div>
                     <div class="timeSlot d-flex align-items-center gap-2 mb-2">
@@ -347,7 +347,7 @@
                         <i class="bi bi-clock"></i>
                       </div>
                       <div class="Date text-muted small">
-                        {{ formatTime(booking.startTime, booking.endTime) }}
+                        {{ formatTime(booking?.startTime, booking?.endTime) }}
                       </div>
                     </div>
                     <div class="duration d-flex align-items-center gap-2">
@@ -358,7 +358,7 @@
                         <i class="bi bi-hourglass"></i>
                       </div>
                       <div class="Date text-muted small">
-                        {{ booking.serviceId.durationMinutes }} min
+                        {{ booking?.serviceId?.durationMinutes }} min
                       </div>
                     </div>
                   </div>
@@ -375,7 +375,7 @@
                     </div>
                     <div class="priceDetails">
                       <div class="price fw-bold" style="color: var(--main-color)">
-                        ${{ booking.serviceId.price }}
+                        ${{ booking?.serviceId?.price }}
                       </div>
                       <span class="text-muted small">Total price</span>
                     </div>
@@ -389,7 +389,7 @@
                     :class="booking.status"
                     style="width: fit-content; padding: 7px 10px 7px 25px"
                   >
-                    {{ capitalize(booking.status) }}
+                    {{ capitalize(booking?.status) }}
                   </div>
                 </div>
                 <div
@@ -398,14 +398,14 @@
                   <div class="bookingButtons d-flex flex-xl-column text-center gap-2">
                     <div class="viewDetails mb-xl-2 flex-grow-1">
                       <router-link
-                        :to="{ name: 'MyBooking', params: { bookingId: booking._id } }"
+                        :to="{ name: 'MyBooking', params: { bookingId: booking?._id } }"
                         class="btn btn-outline-primary"
                         >View Details</router-link
                       >
                     </div>
                     <div
                       class="cancel mx-auto flex-grow-1"
-                      v-if="booking.status !== 'cancelled' && booking.status !== 'completed'"
+                      v-if="booking?.status !== 'cancelled' && booking?.status !== 'completed'"
                       @click.prevent="cancelBookingFunc(booking)"
                     >
                       <button class="btn d-flex align-items-center gap-2 mx-auto">

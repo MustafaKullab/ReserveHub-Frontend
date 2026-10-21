@@ -57,7 +57,7 @@
                 </div>
                 <div class="detai">
                   <div class="title text-muted">Total Bookings</div>
-                  <div class="number fs-4 fw-bold">{{ counts.total || 0 }}</div>
+                  <div class="number fs-4 fw-bold">{{ counts?.total || 0 }}</div>
                 </div>
               </div>
             </div>
@@ -77,7 +77,7 @@
                 </div>
                 <div class="detai">
                   <div class="title text-muted">Pending</div>
-                  <div class="number fs-4 fw-bold">{{ counts.pending || 0 }}</div>
+                  <div class="number fs-4 fw-bold">{{ counts?.pending || 0 }}</div>
                 </div>
               </div>
             </div>
@@ -97,7 +97,7 @@
                 </div>
                 <div class="detai">
                   <div class="title text-muted">Confirmed</div>
-                  <div class="number fs-4 fw-bold">{{ counts.confirmed || 0 }}</div>
+                  <div class="number fs-4 fw-bold">{{ counts?.confirmed || 0 }}</div>
                 </div>
               </div>
             </div>
@@ -117,7 +117,7 @@
                 </div>
                 <div class="detai">
                   <div class="title text-muted">Cancelled</div>
-                  <div class="number fs-4 fw-bold">{{ counts.cancelled || 0 }}</div>
+                  <div class="number fs-4 fw-bold">{{ counts?.cancelled || 0 }}</div>
                 </div>
               </div>
             </div>
@@ -137,7 +137,7 @@
                 </div>
                 <div class="detai">
                   <div class="title text-muted">Completed</div>
-                  <div class="number fs-4 fw-bold">{{ counts.completed || 0 }}</div>
+                  <div class="number fs-4 fw-bold">{{ counts?.completed || 0 }}</div>
                 </div>
               </div>
             </div>
@@ -216,9 +216,7 @@
                       borderTopLeftRadius: i === 0 ? '5px' : '0',
                       borderTopRightRadius: i === 6 ? '5px' : '0',
                     }"
-                  >
-                    {{ column }}
-                  </th>
+                  ></th>
                 </tr>
               </thead>
 
@@ -324,8 +322,10 @@
                         </div>
 
                         <div class="info">
-                          <div class="name fw-bold">{{ booking.userId.username }}</div>
-                          <div class="text description text-muted">{{ booking.userId.email }}</div>
+                          <div class="name fw-bold">{{ booking?.userId?.username }}</div>
+                          <div class="text description text-muted">
+                            {{ booking?.userId?.email }}
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -333,12 +333,16 @@
                   <td>
                     <div class="service-cell d-flex align-items-center gap-3 mt-2">
                       <div class="image" style="flex-shrink: 0">
-                        <img src="@/assets/2.png" style="width: 70px" alt="" />
+                        <img
+                          :src="`${apiUrlImage}${booking?.serviceId?.image}`"
+                          style="width: 70px"
+                          alt=""
+                        />
                       </div>
                       <div class="details">
-                        <div class="name fw-bold">{{ booking.serviceId.name }}</div>
+                        <div class="name fw-bold">{{ booking?.serviceId?.name }}</div>
                         <div class="duration text-muted">
-                          {{ booking.serviceId.durationMinutes }} min
+                          {{ booking?.serviceId?.durationMinutes }} min
                         </div>
                       </div>
                     </div>
@@ -350,26 +354,28 @@
                         <div class="icon" style="color: #0c6bfe">
                           <i class="bi bi-calendar2-event"></i>
                         </div>
-                        <div class="dateFormat text-muted">{{ formatDate(booking.startTime) }}</div>
+                        <div class="dateFormat text-muted">
+                          {{ formatDate(booking?.startTime) }}
+                        </div>
                       </div>
                       <div class="time d-flex align-items-center gap-2">
                         <div class="icon" style="color: #0c6bfe"><i class="bi bi-clock"></i></div>
                         <div class="timeFormat text-muted">
-                          {{ formatTime(booking.startTime) }}
+                          {{ formatTime(booking?.startTime) }}
                         </div>
                       </div>
                     </div>
                   </td>
                   <td class="price">
-                    <div class="rounded fw-bold mt-3">${{ booking.serviceId.price }}</div>
+                    <div class="rounded fw-bold mt-3">${{ booking?.serviceId?.price }}</div>
                   </td>
                   <td>
                     <div
                       class="status rounded mt-3"
-                      :class="booking.status"
+                      :class="booking?.status"
                       style="padding: 5px 10px 5px 25px; width: fit-content"
                     >
-                      {{ capitalize(booking.status) }}
+                      {{ capitalize(booking?.status) }}
                     </div>
                   </td>
                   <td class="actions">
@@ -377,7 +383,7 @@
                       <div class="viewLink">
                         <router-link
                           class="edit btn btn-outline-primary d-flex align-items-center gap-2"
-                          :to="{ name: 'bookingDetails', params: { bookingId: booking._id } }"
+                          :to="{ name: 'bookingDetails', params: { bookingId: booking?._id } }"
                         >
                           <div class="icon"><i class="bi bi-eye"></i></div>
                           <div class="text">View</div>
@@ -393,20 +399,20 @@
                               aria-expanded="false"
                               style="appearance: none"
                               :disabled="
-                                booking.status === 'completed' || booking.status === 'cancelled'
+                                booking?.status === 'completed' || booking?.status === 'cancelled'
                               "
                             >
                               <i class="bi bi-three-dots"></i>
                             </button>
                             <ul class="dropdown-menu py-0">
-                              <li class="ms-0 py-1" v-if="booking.status === 'pending'">
+                              <li class="ms-0 py-1" v-if="booking?.status === 'pending'">
                                 <div
                                   class="dropdown-item active d-flex align-items-center gap-2"
                                   style="cursor: pointer"
                                   @click.prevent="
                                     changeStatusOfBooking({
                                       status: 'confirmed',
-                                      bookingId: booking._id,
+                                      bookingId: booking?._id,
                                     })
                                   "
                                 >
@@ -416,14 +422,14 @@
                                   <div class="text">Confirm Booking</div>
                                 </div>
                               </li>
-                              <li class="ms-0 py-1" v-if="booking.status === 'confirmed'">
+                              <li class="ms-0 py-1" v-if="booking?.status === 'confirmed'">
                                 <div
                                   class="dropdown-item d-flex align-items-center gap-2"
                                   style="cursor: pointer"
                                   @click.prevent="
                                     changeStatusOfBooking({
                                       status: 'completed',
-                                      bookingId: booking._id,
+                                      bookingId: booking?._id,
                                     })
                                   "
                                 >
@@ -440,7 +446,7 @@
                                   @click.prevent="
                                     changeStatusOfBooking({
                                       status: 'cancelled',
-                                      bookingId: booking._id,
+                                      bookingId: booking?._id,
                                     })
                                   "
                                 >
@@ -467,20 +473,21 @@
             <div class="info text-muted">
               Showing
               {{
-                pagination.totalItems === 0
+                pagination?.totalItems === 0
                   ? 0
-                  : (pagination.currentPage - 1) * pagination.limit + 1
+                  : (pagination?.currentPage - 1) * pagination?.limit + 1
               }}
-              to {{ Math.min(pagination.limit * pagination.currentPage, pagination.totalItems) }} of
-              {{ pagination.totalItems }}
+              to
+              {{ Math.min(pagination?.limit * pagination?.currentPage, pagination?.totalItems) }} of
+              {{ pagination?.totalItems }}
               Bookings
             </div>
             <div class="buttons d-flex align-items-center gap-2">
               <div class="prevPage">
                 <button
                   class="btn border"
-                  :disabled="!pagination.hasPrevPage"
-                  @click.prevent="changePage(pagination.currentPage - 1)"
+                  :disabled="!pagination?.hasPrevPage"
+                  @click.prevent="changePage(pagination?.currentPage - 1)"
                 >
                   <i class="bi bi-chevron-left"></i>
                 </button>
@@ -488,7 +495,7 @@
               <div v-for="(num, i) of paginationComp" :key="i">
                 <button
                   class="btn border"
-                  :class="num == pagination.currentPage ? 'active' : ''"
+                  :class="num == pagination?.currentPage ? 'active' : ''"
                   @click.prevent="changePage(num)"
                 >
                   {{ num }}
@@ -497,8 +504,8 @@
               <div class="nextPage">
                 <button
                   class="btn border"
-                  :disabled="!pagination.hasNextPage"
-                  @click.prevent="changePage(pagination.currentPage + 1)"
+                  :disabled="!pagination?.hasNextPage"
+                  @click.prevent="changePage(pagination?.currentPage + 1)"
                 >
                   <i class="bi bi-chevron-right"></i>
                 </button>
@@ -572,7 +579,7 @@ watch(searchInput, () => {
     queries.value.page = 1;
     queries.value.search = searchInput.value;
     coldown = null;
-  }, 1000);
+  }, 300);
 });
 
 watch([() => queries.value.status, () => queries.value.limit], () => {

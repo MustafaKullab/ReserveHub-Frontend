@@ -11,28 +11,36 @@
         </p>
       </div>
     </div>
-
-    <div class="services row" v-if="loading">
-      <div class="col-md-4 col-lg-3" v-for="n in 8" :key="'skeleton-' + n">
-        <div class="service skeleton-card bg-white rounded border mb-3 shadow-sm">
+    <div v-if="props.loading" class="services row px-1 px-lg-2">
+      <div class="col-md-6 col-lg-4 col-xl-3 px-2 mb-3" v-for="n in 8" :key="'skeleton-' + n">
+        <div class="skeleton-card bg-white rounded shadow-sm overflow-hidden">
           <div class="skeleton skeleton-img"></div>
 
-          <div class="serviceDetails py-2 px-3">
-            <div class="skeleton skeleton-title my-3"></div>
+          <div class="serviceDetails px-3 py-3">
+            <div class="skeleton skeleton-title mb-3"></div>
 
-            <div class="d-flex align-items-center justify-content-between my-3">
-              <div class="skeleton skeleton-price"></div>
-              <div class="vr mx-2"></div>
-              <div class="skeleton skeleton-duration"></div>
+            <div class="skeleton skeleton-description mb-2"></div>
+            <div class="skeleton skeleton-description short mb-3"></div>
+
+            <div class="d-flex align-items-center justify-content-between mt-3">
+              <div class="d-flex align-items-center gap-2">
+                <div class="skeleton skeleton-icon"></div>
+                <div class="skeleton skeleton-meta"></div>
+              </div>
+
+              <div class="d-flex align-items-center gap-2">
+                <div class="skeleton skeleton-icon"></div>
+                <div class="skeleton skeleton-meta price"></div>
+              </div>
+
+              <div class="skeleton skeleton-button"></div>
             </div>
-
-            <div class="skeleton skeleton-button mb-2"></div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="services row px-1 px-lg-2" v-if="!loading && services.length > 0">
+    <div class="services row px-1 px-lg-2" v-else-if="!props.loading && services.length > 0">
       <div
         class="col-md-6 col-lg-4 col-xl-3 px-2 mb-3"
         v-for="service of props.services"
@@ -161,6 +169,79 @@ const props = defineProps(["services", "loading"]);
     100% {
       transform: translate(-2px);
     }
+  }
+}
+
+.skeleton-card {
+  height: 100%;
+}
+
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background-color: #e9eff6;
+  border-radius: 6px;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.75), transparent);
+    animation: skeleton-shimmer 1.4s infinite;
+  }
+
+  &-img {
+    height: 200px;
+    border-radius: 0;
+  }
+
+  &-title {
+    height: 19px;
+    width: 70%;
+  }
+
+  &-description {
+    height: 10px;
+    width: 100%;
+
+    &.short {
+      width: 60%;
+    }
+  }
+
+  &-icon {
+    height: 13px;
+    width: 13px;
+    border-radius: 50%;
+  }
+
+  &-meta {
+    height: 10px;
+    width: 38px;
+
+    &.price {
+      width: 48px;
+    }
+  }
+
+  &-button {
+    height: 38px;
+    width: 38px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+}
+
+@keyframes skeleton-shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton::after {
+    animation: none;
   }
 }
 </style>
